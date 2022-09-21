@@ -1,4 +1,4 @@
-package udacity.fwd.project2solution.main
+package udacity.fwd.project2solution.ui.main
 
 import androidx.lifecycle.ViewModel
 

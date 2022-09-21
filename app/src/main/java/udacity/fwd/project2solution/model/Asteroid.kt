@@ -1,4 +1,4 @@
-package udacity.fwd.project2solution
+package udacity.fwd.project2solution.model
 
 
 import android.os.Parcelable

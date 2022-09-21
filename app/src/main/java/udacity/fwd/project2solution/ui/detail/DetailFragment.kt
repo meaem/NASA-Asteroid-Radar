@@ -1,4 +1,4 @@
-package udacity.fwd.project2solution.detail
+package udacity.fwd.project2solution.ui.detail
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -1,4 +1,4 @@
-package udacity.fwd.project2solution.main
+package udacity.fwd.project2solution.ui.main
 
 import android.os.Bundle
 import android.view.*

@@ -1,9 +1,9 @@
 package udacity.fwd.project2solution.api
 
 import org.json.JSONObject
-import udacity.fwd.project2solution.Asteroid
-import udacity.fwd.project2solution.Constants.API_QUERY_DATE_FORMAT
-import udacity.fwd.project2solution.Constants.DEFAULT_END_DATE_DAYS
+import udacity.fwd.project2solution.api.Constants.API_QUERY_DATE_FORMAT
+import udacity.fwd.project2solution.api.Constants.DEFAULT_END_DATE_DAYS
+import udacity.fwd.project2solution.model.Asteroid
 import java.text.SimpleDateFormat
 import java.util.*
 

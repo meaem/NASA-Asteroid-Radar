@@ -1,4 +1,4 @@
-package udacity.fwd.project2solution
+package udacity.fwd.project2solution.api
 
 object Constants {
     const val API_QUERY_DATE_FORMAT = "YYYY-MM-dd"
