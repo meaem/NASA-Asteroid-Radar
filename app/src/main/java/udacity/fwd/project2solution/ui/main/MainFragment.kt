@@ -32,6 +32,7 @@ class MainFragment : Fragment() {
         binding.lifecycleOwner = this
 
         binding.viewModel = viewModel
+        binding.asteroidRecycler.adapter = AsteroidListAdapter()
 
         setHasOptionsMenu(true)
 
