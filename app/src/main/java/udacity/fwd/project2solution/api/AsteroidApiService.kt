@@ -1,16 +1,19 @@
 package udacity.fwd.project2solution.api
 
+
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Query
 import udacity.fwd.project2solution.api.Constants.API_KEY_STRING
-import udacity.fwd.project2solution.api.Constants.API_KEY_VALUE
-import udacity.fwd.project2solution.api.Constants.HOST
-import udacity.fwd.project2solution.api.Constants.SCHEME
+import udacity.fwd.project2solution.api.Constants.END_DATE_STRING
+import udacity.fwd.project2solution.api.Constants.START_DATE_STRING
+import udacity.fwd.project2solution.api.Constants.url
 import udacity.fwd.project2solution.model.PictureOfDay
 
 /**
@@ -21,34 +24,33 @@ private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
     .build()
 
-private val url = HttpUrl.Builder()
-    .scheme(SCHEME)
-    .host(HOST)
-    .addQueryParameter(API_KEY_STRING, API_KEY_VALUE)
-    .build(); // HttpUrl.Builder(). BASE_URL.toUri().buildUpon().query(API_QUERY).build()
 
-
-private val logging = HttpLoggingInterceptor()
-// set your desired log level
-logging.setLevel(HttpLoggingInterceptor.Level.BODY)
 private val httpClient = OkHttpClient.Builder()
-// add your other interceptors …
-// add logging as last interceptor
-httpClient.addInterceptor(logging);  // <-- this is the important line!
+    .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)).build()
 
 /**
  * Use the Retrofit builder to build a retrofit object using a Moshi converter with our Moshi
  * object.
  */
 private val retrofit = Retrofit.Builder()
+    .addConverterFactory(ScalarsConverterFactory.create())
     .addConverterFactory(MoshiConverterFactory.create(moshi))
     .baseUrl(url)
 
+    .client(httpClient)
     .build()
 
 interface AsteroidApiService {
     @GET("planetary/apod")
-    suspend fun getImageOfTheDay(): PictureOfDay
+    suspend fun getImageOfTheDay(@Query("${API_KEY_STRING}") apiKey: String): PictureOfDay
+
+    //https://api.nasa.gov/neo/rest/v1/feed?start_date=START_DATE&end_date=END_DATE&api_key=YOUR_API_KEY
+    @GET("neo/rest/v1/feed")
+    suspend fun getAsteroids(
+        @Query(API_KEY_STRING) apiKey: String,
+        @Query(START_DATE_STRING) start_date: String,
+        @Query(END_DATE_STRING) end_date: String
+    ): String
 }
 
 object AsteroidApi {

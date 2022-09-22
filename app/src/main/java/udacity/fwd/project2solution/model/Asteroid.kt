@@ -10,6 +10,4 @@ data class Asteroid(
     val absoluteMagnitude: Double, val estimatedDiameter: Double,
     val relativeVelocity: Double, val distanceFromEarth: Double,
     val isPotentiallyHazardous: Boolean
-) : Parcelable {
-    val idAndCodeName = "$id ($codename)"
-}
+) : Parcelable
