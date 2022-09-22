@@ -17,11 +17,13 @@ import udacity.fwd.project2solution.databinding.FragmentDetailBinding
  */
 class DetailFragment : Fragment() {
 
-lateinit var title: String
+    //Fragment Title
+    lateinit var title: String
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val binding = FragmentDetailBinding.inflate(inflater)
         binding.lifecycleOwner = this
 
@@ -29,6 +31,7 @@ lateinit var title: String
 
         binding.asteroid = asteroid
         title = asteroid.codename
+
         binding.helpButton.setOnClickListener {
             displayAstronomicalUnitExplanationDialog()
         }
