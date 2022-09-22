@@ -21,4 +21,6 @@
     <string name="nasa_picture_of_day_content_description_format">NASA\'s picture of day: %s</string>
     <string name="loading_asteroids">Loading Asteroids</string>
     <string name="failed_loading_asteroids">Loading asteroids failure due to internet connection error</string>
+    <string name="loading_image_of_the_day">Loading Image of the day</string>
+    <string name="failed_loading_image_of_the_day">Loading Image of the day failure due to internet connection error</string>
 </resources>
