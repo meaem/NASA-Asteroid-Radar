@@ -36,7 +36,7 @@ class MainFragment : Fragment() {
         binding.asteroidRecycler.adapter = AsteroidListAdapter() {
             findNavController().navigate(
                 MainFragmentDirections.actionMainFragmentToDetailFragment(
-                    it
+                    it, it.codename
                 )
             )
         }

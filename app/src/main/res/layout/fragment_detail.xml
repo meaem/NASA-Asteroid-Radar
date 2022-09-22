@@ -41,18 +41,6 @@
                 android:orientation="vertical">
 
 
-                <TextView
-                    android:id="@+id/code_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:gravity="center_horizontal"
-                    android:text="@{asteroid.codename}"
-                    android:textColor="@color/default_text_color"
-                    android:textSize="10sp"
-                    tools:text="2020-02-01"
-
-                    />
 
                 <TextView
                     android:layout_width="match_parent"

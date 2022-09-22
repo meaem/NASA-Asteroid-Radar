@@ -17,7 +17,7 @@ import udacity.fwd.project2solution.databinding.FragmentDetailBinding
  */
 class DetailFragment : Fragment() {
 
-
+lateinit var title: String
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,7 +28,7 @@ class DetailFragment : Fragment() {
         val asteroid = DetailFragmentArgs.fromBundle(requireArguments()).selectedAsteroid
 
         binding.asteroid = asteroid
-
+        title = asteroid.codename
         binding.helpButton.setOnClickListener {
             displayAstronomicalUnitExplanationDialog()
         }
