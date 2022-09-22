@@ -8,13 +8,20 @@ import androidx.recyclerview.widget.RecyclerView
 import udacity.fwd.project2solution.databinding.AsteroidRecyclerViewItemBinding
 import udacity.fwd.project2solution.model.Asteroid
 
-class AsteroidListAdapter :
+class AsteroidListAdapter(private val onAsteroidClick: (ast: Asteroid) -> Unit) :
     ListAdapter<Asteroid, AsteroidListAdapter.AstroidViewHolder>(DiffCallback) {
 
-    class AstroidViewHolder(private val binding: AsteroidRecyclerViewItemBinding) :
+    class AstroidViewHolder(
+        private val binding: AsteroidRecyclerViewItemBinding,
+        private val onAsteroidClick: (ast: Asteroid) -> Unit
+    ) :
         RecyclerView.ViewHolder(binding.root) {
+
         fun bind(item: Asteroid) {
             binding.asteroid = item
+            binding.root.setOnClickListener {
+                onAsteroidClick(item)
+            }
             binding.executePendingBindings()
 //                binding.closeApproachDateTv.text = item.closeApproachDate
 
@@ -30,12 +37,13 @@ class AsteroidListAdapter :
                 LayoutInflater.from(parent.context),
                 parent,
                 false
-            )
+            ), onAsteroidClick
         )
     }
 
     override fun onBindViewHolder(holder: AstroidViewHolder, position: Int) {
         holder.bind(getItem(position))
+
     }
 
     companion object DiffCallback : DiffUtil.ItemCallback<Asteroid>() {

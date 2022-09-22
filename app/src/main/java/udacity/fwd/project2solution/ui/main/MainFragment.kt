@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import udacity.fwd.project2solution.R
 import udacity.fwd.project2solution.databinding.FragmentMainBinding
 
@@ -32,7 +33,13 @@ class MainFragment : Fragment() {
         binding.lifecycleOwner = this
 
         binding.viewModel = viewModel
-        binding.asteroidRecycler.adapter = AsteroidListAdapter()
+        binding.asteroidRecycler.adapter = AsteroidListAdapter() {
+            findNavController().navigate(
+                MainFragmentDirections.actionMainFragmentToDetailFragment(
+                    it
+                )
+            )
+        }
 
         setHasOptionsMenu(true)
 
