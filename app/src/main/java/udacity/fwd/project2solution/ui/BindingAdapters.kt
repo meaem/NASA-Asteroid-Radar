@@ -1,12 +1,16 @@
 package udacity.fwd.project2solution
 
+import android.os.Build
 import android.view.View
 import android.widget.ImageView
-import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.annotation.RequiresApi
+import androidx.core.net.toUri
 
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
+
 import udacity.fwd.project2solution.model.Asteroid
 import udacity.fwd.project2solution.ui.main.AsteroidApiStatus
 import udacity.fwd.project2solution.ui.main.AsteroidListAdapter
@@ -56,22 +60,63 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<Asteroid>?) {
 }
 
 @BindingAdapter("asteroidApiStatus")
-fun bindAsteroidStatus(progressBar: ProgressBar, status: AsteroidApiStatus) {
+fun bindAsteroidStatus(imageView: ImageView, status: AsteroidApiStatus) {
     when (status) {
         AsteroidApiStatus.LOADING -> {
-            progressBar.visibility = View.VISIBLE
-            progressBar.indeterminateDrawable =
-                progressBar.context.getDrawable(R.drawable.loading_animation)
-//            "@drawable/my_progress_indeterminate"
-
-//            imageView.setImageResource(R.drawable.loading_animation)
+            imageView.visibility = View.VISIBLE
+            imageView.setImageResource(R.drawable.loading_animation)
+            imageView.contentDescription = imageView.context.getString(R.string.loading_asteroids)
         }
         AsteroidApiStatus.ERROR -> {
-            progressBar.visibility = View.VISIBLE
-//            imageView.setImageResource(R.drawable.ic_connection_error)
+            imageView.visibility = View.VISIBLE
+            imageView.setImageResource(R.drawable.ic_connection_error)
+            imageView.contentDescription =
+                imageView.context.getString(R.string.failed_loading_asteroids)
+
         }
         AsteroidApiStatus.DONE -> {
-            progressBar.visibility = View.GONE
+            imageView.visibility = View.GONE
         }
     }
+}
+
+
+@RequiresApi(Build.VERSION_CODES.M)
+@BindingAdapter("imageUrl")
+fun bindImageOfDayStatus(imageView: ImageView, imgUrl: String?) {
+//    when (status) {
+//        AsteroidApiStatus.LOADING -> {
+//            imageView.visibility = View.VISIBLE
+//            imageView.setImageResource(R.drawable.loading_animation)
+//        }
+//        AsteroidApiStatus.ERROR -> {
+//            imageView.visibility = View.VISIBLE
+//            imageView.setImageResource(R.drawable.ic_connection_error)
+//        }
+//        AsteroidApiStatus.DONE -> {
+//            imageView.visibility = View.GONE
+//        }
+//    }
+
+    imgUrl?.let {
+        val imgUri = imgUrl.toUri().buildUpon().scheme("https").build()
+//        imageView.setBackgroundColor(imageView.context.getColor(R.color.colorAccent))
+//        Picasso.get().load("https://i.imgur.com/DvpvklR.png").into(imageView)
+
+        Picasso.with(imageView.context)
+            .load(imgUri)
+            .placeholder(R.drawable.loading_animation)
+            .error(R.drawable.ic_broken_image)
+            .into(imageView);
+
+//        Glide.with(ImageView.context)
+//            .load(imgUri)
+//            .apply(
+//                RequestOptions()
+//                    .placeholder(R.drawable.loading_animation)
+//                    .error(R.drawable.ic_broken_image)
+//            )
+//            .into(ImageView)
+    }
+
 }

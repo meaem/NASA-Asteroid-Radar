@@ -15,18 +15,23 @@ enum class AsteroidApiStatus {
 class MainViewModel : ViewModel() {
 
     private val _apiStatus = MutableLiveData<AsteroidApiStatus>()
-
-    // The external immutable LiveData for the status String
     val apiStatus: LiveData<AsteroidApiStatus>
         get() = _apiStatus
+
 
     private val _asteroids = MutableLiveData<List<Asteroid>>()
     val asteroids: LiveData<List<Asteroid>>
         get() = _asteroids
 
+
+    private val _imgaeOfDay = MutableLiveData<String>()
+    val imageOfDay: LiveData<String>
+        get() = _imgaeOfDay
+
     init {
         _apiStatus.value = AsteroidApiStatus.LOADING
-
+        _imgaeOfDay.value =
+            "https://www.nasa.gov/sites/default/files/styles/full_width_feature/public/thumbnails/image/gsfc_20171208_archive_e000226_orig.jpg"
         //ToDo simulate a delay in the fetching data. This should be removed
         viewModelScope.launch {
             delay(3000)

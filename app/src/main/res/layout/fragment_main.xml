@@ -31,7 +31,7 @@
                 android:adjustViewBounds="true"
                 android:contentDescription="@string/image_of_the_day"
                 android:scaleType="centerCrop"
-                app:srcCompat="@drawable/placeholder_picture_of_day" />
+                app:imageUrl="@{viewModel.imageOfDay}" />
 
             <TextView
                 android:id="@+id/textView"
@@ -59,19 +59,20 @@
             app:layout_constraintTop_toBottomOf="@+id/activity_main_image_of_the_day_layout"
             app:layout_constraintVertical_bias="0.0"
             app:listData="@{viewModel.asteroids}"
-            tools:background="#00B8D4"
             tools:listitem="@layout/asteroid_recycler_view_item" />
 
-        <ProgressBar
+        <ImageView
             android:id="@+id/status_loading_wheel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:indeterminate="true"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:contentDescription="@string/loading_asteroids"
             app:asteroidApiStatus="@{viewModel.apiStatus}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:visibility="visible" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/activity_main_image_of_the_day_layout"
+            app:layout_constraintVertical_bias="0.0"
+            tools:ignore="ImageContrastCheck" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
