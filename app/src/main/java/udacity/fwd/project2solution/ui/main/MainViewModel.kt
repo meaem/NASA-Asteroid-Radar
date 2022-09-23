@@ -12,10 +12,11 @@ import udacity.fwd.project2solution.api.Constants.API_KEY_VALUE
 import udacity.fwd.project2solution.api.Constants.url
 import udacity.fwd.project2solution.api.getNextSevenDaysFormattedDates
 import udacity.fwd.project2solution.api.parseAsteroidsJsonResult
+import udacity.fwd.project2solution.database.AsteroidDao
 import udacity.fwd.project2solution.model.Asteroid
 import udacity.fwd.project2solution.model.PictureOfDay
 
-class MainViewModel : ViewModel() {
+class MainViewModel(dataSource: AsteroidDao) : ViewModel() {
 
     private val _apiStatus = MutableLiveData<AsteroidApiStatus>()
     val apiStatus: LiveData<AsteroidApiStatus>
