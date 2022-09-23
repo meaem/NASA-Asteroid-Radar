@@ -6,19 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import udacity.fwd.project2solution.R
 import udacity.fwd.project2solution.databinding.FragmentDetailBinding
 
 
-/**
- * A simple [Fragment] subclass.
- * Use the [DetailFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class DetailFragment : Fragment() {
 
-    //Fragment Title
-    lateinit var title: String
+    lateinit var viewModel: DetailViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,13 +23,19 @@ class DetailFragment : Fragment() {
         binding.lifecycleOwner = this
 
         val asteroid = DetailFragmentArgs.fromBundle(requireArguments()).selectedAsteroid
+        val factory = DetailViewModelFactory(asteroid)
+        viewModel = ViewModelProvider(this, factory).get(DetailViewModel::class.java)
 
-        binding.asteroid = asteroid
-        title = asteroid.codename
 
-        binding.helpButton.setOnClickListener {
-            displayAstronomicalUnitExplanationDialog()
+        viewModel.shoeAlert.observe(viewLifecycleOwner) {
+            if (it) {
+                displayAstronomicalUnitExplanationDialog()
+                viewModel.displayAlertComplete()
+            }
         }
+
+        binding.viewModel = viewModel
+
 
         return binding.root
     }

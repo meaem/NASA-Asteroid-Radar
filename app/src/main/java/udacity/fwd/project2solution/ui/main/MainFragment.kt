@@ -36,7 +36,6 @@ class MainFragment : Fragment() {
         val application = requireNotNull(this.activity).application
 
         val dataSource = AsteroidDatabase.getInstance(application).asteroidDao
-//       viewModel  by viewModels<MainViewModel>()
         val viewModelFactory = MainViewModelFactory(dataSource)
 
         // Get a reference to the ViewModel associated with this fragment.
@@ -46,7 +45,7 @@ class MainFragment : Fragment() {
 
         binding.viewModel = viewModel
         binding.asteroidRecycler.adapter =
-            AsteroidListAdapter(AsteroidListAdapter.onAsteroidClickListener {
+            AsteroidListAdapter(AsteroidListAdapter.AsteroidClickListener {
                 findNavController().navigate(
                     MainFragmentDirections.actionMainFragmentToDetailFragment(
                         it, it.codename

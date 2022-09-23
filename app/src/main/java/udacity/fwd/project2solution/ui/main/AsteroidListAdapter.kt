@@ -8,43 +8,37 @@ import androidx.recyclerview.widget.RecyclerView
 import udacity.fwd.project2solution.databinding.AsteroidRecyclerViewItemBinding
 import udacity.fwd.project2solution.model.Asteroid
 
-class AsteroidListAdapter(private val onClickListener: onAsteroidClickListener) :
-    ListAdapter<Asteroid, AsteroidListAdapter.AstroidViewHolder>(DiffCallback) {
+class AsteroidListAdapter(private val onClickListener: AsteroidClickListener) :
+    ListAdapter<Asteroid, AsteroidListAdapter.AsteroidViewHolder>(DiffCallback) {
 
-    class AstroidViewHolder(
-        private val binding: AsteroidRecyclerViewItemBinding,
-        private val onClickListener: onAsteroidClickListener
+    class AsteroidViewHolder(
+        private val binding: AsteroidRecyclerViewItemBinding
     ) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Asteroid) {
             binding.asteroid = item
-
             binding.executePendingBindings()
-//                binding.closeApproachDateTv.text = item.closeApproachDate
-
         }
 
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AstroidViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AsteroidViewHolder {
 
-        return AstroidViewHolder(
+        return AsteroidViewHolder(
             AsteroidRecyclerViewItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
-            ), onClickListener
+            )
         )
     }
 
-    override fun onBindViewHolder(holder: AstroidViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: AsteroidViewHolder, position: Int) {
         val ast = getItem(position)
         holder.itemView.setOnClickListener {
-
             onClickListener.onClick(ast)
-
         }
         holder.bind(ast)
 
@@ -61,7 +55,7 @@ class AsteroidListAdapter(private val onClickListener: onAsteroidClickListener) 
 
     }
 
-    class onAsteroidClickListener(private val clickListener: (asteroid: Asteroid) -> Unit) {
+    class AsteroidClickListener(private val clickListener: (asteroid: Asteroid) -> Unit) {
         fun onClick(asteroid: Asteroid) = clickListener(asteroid)
     }
 
