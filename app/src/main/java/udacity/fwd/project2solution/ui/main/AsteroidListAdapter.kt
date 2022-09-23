@@ -8,20 +8,18 @@ import androidx.recyclerview.widget.RecyclerView
 import udacity.fwd.project2solution.databinding.AsteroidRecyclerViewItemBinding
 import udacity.fwd.project2solution.model.Asteroid
 
-class AsteroidListAdapter(private val onAsteroidClick: (ast: Asteroid) -> Unit) :
+class AsteroidListAdapter(private val onClickListener: onAsteroidClickListener) :
     ListAdapter<Asteroid, AsteroidListAdapter.AstroidViewHolder>(DiffCallback) {
 
     class AstroidViewHolder(
         private val binding: AsteroidRecyclerViewItemBinding,
-        private val onAsteroidClick: (ast: Asteroid) -> Unit
+        private val onClickListener: onAsteroidClickListener
     ) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Asteroid) {
             binding.asteroid = item
-            binding.root.setOnClickListener {
-                onAsteroidClick(item)
-            }
+
             binding.executePendingBindings()
 //                binding.closeApproachDateTv.text = item.closeApproachDate
 
@@ -37,12 +35,18 @@ class AsteroidListAdapter(private val onAsteroidClick: (ast: Asteroid) -> Unit) 
                 LayoutInflater.from(parent.context),
                 parent,
                 false
-            ), onAsteroidClick
+            ), onClickListener
         )
     }
 
     override fun onBindViewHolder(holder: AstroidViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        val ast = getItem(position)
+        holder.itemView.setOnClickListener {
+
+            onClickListener.onClick(ast)
+
+        }
+        holder.bind(ast)
 
     }
 
@@ -56,6 +60,11 @@ class AsteroidListAdapter(private val onAsteroidClick: (ast: Asteroid) -> Unit) 
         }
 
     }
+
+    class onAsteroidClickListener(private val clickListener: (asteroid: Asteroid) -> Unit) {
+        fun onClick(asteroid: Asteroid) = clickListener(asteroid)
+    }
+
 }
 
 

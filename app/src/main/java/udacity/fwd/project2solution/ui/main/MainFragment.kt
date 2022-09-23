@@ -33,13 +33,14 @@ class MainFragment : Fragment() {
         binding.lifecycleOwner = this
 
         binding.viewModel = viewModel
-        binding.asteroidRecycler.adapter = AsteroidListAdapter() {
-            findNavController().navigate(
-                MainFragmentDirections.actionMainFragmentToDetailFragment(
-                    it, it.codename
+        binding.asteroidRecycler.adapter =
+            AsteroidListAdapter(AsteroidListAdapter.onAsteroidClickListener {
+                findNavController().navigate(
+                    MainFragmentDirections.actionMainFragmentToDetailFragment(
+                        it, it.codename
+                    )
                 )
-            )
-        }
+            })
 
         setHasOptionsMenu(true)
 
