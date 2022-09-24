@@ -63,7 +63,7 @@ fun bindAsteroidStatus(imageView: ImageView, status: AsteroidApiStatus?) {
     when (status) {
         AsteroidApiStatus.LOADING -> {
             imageView.visibility = View.VISIBLE
-            imageView.setImageResource(R.drawable.loading_animation)
+            imageView.setImageResource(R.drawable.downloading_animation)
             imageView.contentDescription = imageView.context.getString(R.string.loading_asteroids)
         }
         AsteroidApiStatus.ERROR -> {
@@ -78,7 +78,7 @@ fun bindAsteroidStatus(imageView: ImageView, status: AsteroidApiStatus?) {
         }
         else -> { // if status is null
             imageView.visibility = View.VISIBLE
-            imageView.setImageResource(R.drawable.loading_animation)
+            imageView.setImageResource(R.drawable.downloading_animation)
             imageView.contentDescription = imageView.context.getString(R.string.loading_asteroids)
         }
     }
