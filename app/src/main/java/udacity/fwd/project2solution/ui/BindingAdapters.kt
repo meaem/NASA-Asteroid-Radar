@@ -59,7 +59,7 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<Asteroid>?) {
 }
 
 @BindingAdapter("asteroidApiStatus")
-fun bindAsteroidStatus(imageView: ImageView, status: AsteroidApiStatus) {
+fun bindAsteroidStatus(imageView: ImageView, status: AsteroidApiStatus?) {
     when (status) {
         AsteroidApiStatus.LOADING -> {
             imageView.visibility = View.VISIBLE
@@ -76,8 +76,39 @@ fun bindAsteroidStatus(imageView: ImageView, status: AsteroidApiStatus) {
         AsteroidApiStatus.DONE -> {
             imageView.visibility = View.GONE
         }
+        else -> { // if status is null
+            imageView.visibility = View.VISIBLE
+            imageView.setImageResource(R.drawable.loading_animation)
+            imageView.contentDescription = imageView.context.getString(R.string.loading_asteroids)
+        }
     }
 }
+
+@BindingAdapter("asteroidApiStatus")
+fun bindAsteroidStatusTextView(imageView: TextView, status: AsteroidApiStatus?) {
+    when (status) {
+        AsteroidApiStatus.LOADING -> {
+            imageView.visibility = View.VISIBLE
+            imageView.setText(R.string.fetching_data)
+
+        }
+        AsteroidApiStatus.ERROR -> {
+            imageView.visibility = View.VISIBLE
+            imageView.setText(R.string.failed_fetch_data)
+            imageView.contentDescription =
+                imageView.context.getString(R.string.failed_loading_asteroids)
+
+        }
+        AsteroidApiStatus.DONE -> {
+            imageView.visibility = View.GONE
+        }
+        else -> { // if status is null
+            imageView.visibility = View.VISIBLE
+            imageView.setText(R.string.fetching_data)
+        }
+    }
+}
+
 
 @BindingAdapter("imageOfDayStatus")
 fun bindimageOfDayStatus(imageView: ImageView, status: AsteroidApiStatus) {

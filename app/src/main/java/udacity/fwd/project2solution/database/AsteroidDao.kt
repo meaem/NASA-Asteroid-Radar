@@ -15,6 +15,6 @@ interface AsteroidDao {
     @Insert(onConflict = IGNORE)
     suspend fun addAllAsteroids(asteroids: List<Asteroid>)
 
-    @Query("SELECT * from asteroid_table ast where ast.closeApproachDate = :startDate")
+    @Query("SELECT * from asteroid_table ast where ast.closeApproachDate >= :startDate")
     fun getAsteroids(startDate: String): LiveData<List<Asteroid>>
 }

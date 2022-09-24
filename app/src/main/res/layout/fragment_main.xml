@@ -47,6 +47,30 @@
                 android:textStyle="bold" />
         </FrameLayout>
 
+        <ImageView
+            android:id="@+id/loading_remotely"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="@string/loadind_data_from_remote_site"
+            app:asteroidApiStatus="@{viewModel.apiStatus}"
+            app:layout_constraintBottom_toBottomOf="@id/activity_main_image_of_the_day_layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_broken_image" />
+
+        <TextView
+            android:id="@+id/fetching_data_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fetching_data"
+            android:textColor="@android:color/white"
+            android:textSize="15sp"
+            app:asteroidApiStatus="@{viewModel.apiStatus}"
+            app:layout_constraintBottom_toBottomOf="@id/activity_main_image_of_the_day_layout"
+            app:layout_constraintEnd_toStartOf="@id/loading_remotely"
+            app:layout_constraintTop_toTopOf="@+id/loading_remotely"
+            tools:text="@string/fetching_data" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/asteroid_recycler"
             android:layout_width="0dp"
@@ -67,7 +91,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:contentDescription="@string/loading_asteroids"
-            app:asteroidApiStatus="@{viewModel.apiStatus}"
+            app:asteroidApiStatus="@{viewModel.dbStatus}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

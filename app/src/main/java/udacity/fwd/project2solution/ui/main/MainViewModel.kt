@@ -1,13 +1,11 @@
 package udacity.fwd.project2solution.ui.main
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 import udacity.fwd.project2solution.api.AsteroidApi
+import udacity.fwd.project2solution.api.Constants
 import udacity.fwd.project2solution.api.Constants.API_KEY_VALUE
 import udacity.fwd.project2solution.api.Constants.url
 import udacity.fwd.project2solution.api.getNextSevenDaysFormattedDates
@@ -15,8 +13,10 @@ import udacity.fwd.project2solution.api.parseAsteroidsJsonResult
 import udacity.fwd.project2solution.database.AsteroidDao
 import udacity.fwd.project2solution.model.Asteroid
 import udacity.fwd.project2solution.model.PictureOfDay
+import java.text.SimpleDateFormat
+import java.util.*
 
-class MainViewModel(dataSource: AsteroidDao) : ViewModel() {
+class MainViewModel(private val dataSource: AsteroidDao) : ViewModel() {
 
     private val _apiStatus = MutableLiveData<AsteroidApiStatus>()
     val apiStatus: LiveData<AsteroidApiStatus>
@@ -27,10 +27,25 @@ class MainViewModel(dataSource: AsteroidDao) : ViewModel() {
     val imgOfTheDayStatus: LiveData<AsteroidApiStatus>
         get() = _imgOfTheDayStatus
 
-    private val _asteroids = MutableLiveData<List<Asteroid>>()
-    val asteroids: LiveData<List<Asteroid>>
-        get() = _asteroids
 
+    private val today = SimpleDateFormat(
+        Constants.API_QUERY_DATE_FORMAT,
+        Locale.getDefault()
+    ).format(Calendar.getInstance().time)
+
+
+    private val _localAsteroids = dataSource.getAsteroids(today)
+
+    val asteroids: LiveData<List<Asteroid>>
+        get() = _localAsteroids
+
+
+    val dbStatus = Transformations.map(asteroids) {
+        when (it?.isEmpty()) {
+            true -> AsteroidApiStatus.LOADING
+            else -> AsteroidApiStatus.DONE
+        }
+    }
 
     private val _imgaeOfDay = MutableLiveData<PictureOfDay?>()
     val imageOfDay: LiveData<PictureOfDay?>
@@ -42,7 +57,7 @@ class MainViewModel(dataSource: AsteroidDao) : ViewModel() {
 
         getImageOfTheDay()
 
-        getAsteroids()
+        getRemoteAsteroids()
     }
 
     private fun getImageOfTheDay() {
@@ -62,7 +77,7 @@ class MainViewModel(dataSource: AsteroidDao) : ViewModel() {
         }
     }
 
-    private fun getAsteroids() {
+    private fun getRemoteAsteroids() {
         viewModelScope.launch {
             _apiStatus.value = AsteroidApiStatus.LOADING
             try {
@@ -72,17 +87,20 @@ class MainViewModel(dataSource: AsteroidDao) : ViewModel() {
                     dates.first(),
                     dates.last()
                 )
-                _asteroids.value = parseAsteroidsJsonResult(JSONObject(resultObject))
+                val _remoteAsteroids = parseAsteroidsJsonResult(JSONObject(resultObject))
+                saveAsteroids(_remoteAsteroids)
                 _apiStatus.value = AsteroidApiStatus.DONE
 
             } catch (e: Exception) {
 
                 _apiStatus.value = AsteroidApiStatus.ERROR
-                _asteroids.value = listOf()
+//                _remoteAsteroids.value = listOf()
                 Log.d("MainViewModel", e.stackTraceToString())
-
-
             }
         }
+    }
+
+    private suspend fun saveAsteroids(asteroids: List<Asteroid>) {
+        dataSource.addAllAsteroids(asteroids)
     }
 }
