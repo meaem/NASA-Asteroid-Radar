@@ -81,6 +81,8 @@
             android:id="@+id/loading_remotely_frame"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:background="@color/text_grey"
             android:gravity="center_vertical"
             android:orientation="horizontal"
@@ -94,6 +96,7 @@
                 android:layout_height="48dp"
                 android:layout_marginEnd="16dp"
                 android:contentDescription="@string/loadind_data_from_remote_site"
+                android:tint="#000000"
                 app:asteroidApiStatus="@{viewModel.apiStatus}" />
 
             <TextView
@@ -101,7 +104,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/fetching_data"
-                android:textColor="@android:color/white"
+                android:textColor="@color/colorPrimary"
                 android:textSize="15sp"
                 app:asteroidApiStatus="@{viewModel.apiStatus}" />
         </LinearLayout>
