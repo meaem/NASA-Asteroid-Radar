@@ -13,7 +13,7 @@ class DetailViewModel(asteroid: Asteroid) : ViewModel() {
 
 
     private val _showAlert = MutableLiveData<Boolean>()
-    val shoeAlert: LiveData<Boolean>
+    val showAlert: LiveData<Boolean>
         get() = _showAlert
 
 
