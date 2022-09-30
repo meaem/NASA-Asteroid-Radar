@@ -26,7 +26,9 @@ private val moshi = Moshi.Builder()
 
 
 private val httpClient = OkHttpClient.Builder()
-    .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)).build()
+    .addInterceptor(
+        HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+    ).build()
 
 /**
  * Use the Retrofit builder to build a retrofit object using a Moshi converter with our Moshi

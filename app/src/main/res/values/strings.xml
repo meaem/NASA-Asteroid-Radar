@@ -27,4 +27,7 @@
     <string name="failed_loading_image_of_the_day">Loading Image of the day failure due to internet connection error</string>
     <string name="loadind_data_from_remote_site">Loadind data from remote site</string>
     <string name="fetching_data">Fetching data remotely …</string>
+    <string name="title_weekly">Weekly</string>
+    <string name="today">today</string>
+    <string name="locally">locally</string>
 </resources>

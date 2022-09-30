@@ -47,6 +47,21 @@
                 android:textStyle="bold" />
         </FrameLayout>
 
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="#55010613"
+            android:padding="16dp"
+            android:text="@{viewModel.title}"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/activity_main_image_of_the_day_layout"
+            tools:text="This week asteroids" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/asteroid_recycler"
@@ -58,7 +73,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/activity_main_image_of_the_day_layout"
+            app:layout_constraintTop_toBottomOf="@+id/title"
             app:layout_constraintVertical_bias="0.0"
             app:listData="@{viewModel.asteroids}"
             tools:listitem="@layout/asteroid_recycler_view_item" />

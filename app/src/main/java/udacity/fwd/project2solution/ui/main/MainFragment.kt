@@ -15,7 +15,7 @@ class MainFragment : Fragment() {
         MainViewModelFactory(
             AsteroidDatabase.getInstance(
                 requireNotNull(this.activity).application
-            ).asteroidDao
+            ).asteroidDao, requireNotNull(this.activity).application
         )
     }
 
@@ -44,6 +44,14 @@ class MainFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        viewModel.updateData(
+            when (item.itemId) {
+                R.id.show_today_menu -> DataChoices.TODAY
+                R.id.show_locally_menu -> DataChoices.LOCALLY
+                else -> DataChoices.CURRENT_WEEK
+
+            }
+        )
         return true
     }
 }

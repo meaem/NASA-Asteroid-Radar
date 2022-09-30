@@ -1,5 +1,6 @@
 package udacity.fwd.project2solution.api
 
+import android.util.Log
 import org.json.JSONObject
 import udacity.fwd.project2solution.api.Constants.API_QUERY_DATE_FORMAT
 import udacity.fwd.project2solution.api.Constants.DEFAULT_END_DATE_DAYS
@@ -58,5 +59,6 @@ fun getNextSevenDaysFormattedDates(): ArrayList<String> {
         calendar.add(Calendar.DAY_OF_YEAR, 1)
     }
 
+    Log.d("getNextSevenDays", formattedDateList.toString())
     return formattedDateList
 }
