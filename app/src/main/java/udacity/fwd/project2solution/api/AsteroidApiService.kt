@@ -14,7 +14,6 @@ import udacity.fwd.project2solution.api.Constants.API_KEY_STRING
 import udacity.fwd.project2solution.api.Constants.END_DATE_STRING
 import udacity.fwd.project2solution.api.Constants.START_DATE_STRING
 import udacity.fwd.project2solution.api.Constants.url
-import udacity.fwd.project2solution.model.PictureOfDay
 
 /**
  * Build the Moshi object that Retrofit will be using, making sure to add the Kotlin adapter for
@@ -44,7 +43,7 @@ private val retrofit = Retrofit.Builder()
 
 interface AsteroidApiService {
     @GET("planetary/apod")
-    suspend fun getImageOfTheDay(@Query("${API_KEY_STRING}") apiKey: String): PictureOfDay
+    suspend fun getImageOfTheDay(@Query(API_KEY_STRING) apiKey: String): NetworkPictureOfDay
 
     //https://api.nasa.gov/neo/rest/v1/feed?start_date=START_DATE&end_date=END_DATE&api_key=YOUR_API_KEY
     @GET("neo/rest/v1/feed")

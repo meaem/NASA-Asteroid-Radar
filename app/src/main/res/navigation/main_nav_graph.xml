@@ -28,7 +28,7 @@
 
         <argument
             android:name="selectedAsteroid"
-            app:argType="udacity.fwd.project2solution.model.Asteroid" />
+            app:argType="udacity.fwd.project2solution.domain.model.Asteroid" />
     </fragment>
 
 </navigation>

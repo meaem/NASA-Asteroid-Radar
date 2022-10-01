@@ -3,7 +3,7 @@ package udacity.fwd.project2solution.ui.detail
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import udacity.fwd.project2solution.model.Asteroid
+import udacity.fwd.project2solution.domain.model.Asteroid
 
 class DetailViewModel(asteroid: Asteroid) : ViewModel() {
 

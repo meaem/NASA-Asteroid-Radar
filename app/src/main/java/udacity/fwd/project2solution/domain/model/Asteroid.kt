@@ -1,15 +1,11 @@
-package udacity.fwd.project2solution.model
+package udacity.fwd.project2solution.domain.model
 
 
 import android.os.Parcelable
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-@Entity(tableName = "asteroid_table")
 data class Asteroid(
-    @PrimaryKey
     val id: Long,
     val codename: String,
     val closeApproachDate: String,
@@ -18,8 +14,4 @@ data class Asteroid(
     val relativeVelocity: Double,
     val distanceFromEarth: Double,
     val isPotentiallyHazardous: Boolean
-) : Parcelable {
-    override fun toString(): String {
-        return codename
-    }
-}
+) : Parcelable

@@ -4,12 +4,18 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import udacity.fwd.project2solution.model.Asteroid
+import udacity.fwd.project2solution.database.entities.AsteroidEntity
+import udacity.fwd.project2solution.database.entities.PictureOfDayEntity
 
-@Database(entities = [Asteroid::class], version = 1, exportSchema = false)
+@Database(
+    entities = [AsteroidEntity::class, PictureOfDayEntity::class],
+    version = 2,
+    exportSchema = false
+)
 abstract class AsteroidDatabase : RoomDatabase() {
 
     abstract val asteroidDao: AsteroidDao
+    abstract val picOdDayDao: PicOfTheDayDao
 
     companion object {
         @Volatile

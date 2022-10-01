@@ -1,7 +1,6 @@
 package udacity.fwd.project2solution
 
 import android.os.Build
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -9,8 +8,7 @@ import androidx.annotation.RequiresApi
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
-import udacity.fwd.project2solution.model.Asteroid
-import udacity.fwd.project2solution.model.PictureOfDay
+import udacity.fwd.project2solution.domain.model.Asteroid
 import udacity.fwd.project2solution.ui.main.AsteroidApiStatus
 import udacity.fwd.project2solution.ui.main.AsteroidListAdapter
 
@@ -134,16 +132,18 @@ fun bindimageOfDayStatus(imageView: ImageView, status: AsteroidApiStatus) {
 
 @RequiresApi(Build.VERSION_CODES.M)
 @BindingAdapter("imageUrl")
-fun bindImageOfDayStatus(imageView: ImageView, imgUrl: PictureOfDay?) {
-    Log.d("PictureOfDay", imgUrl?.url ?: "no picture of the day")
+fun bindImageOfDayStatus(imageView: ImageView, imgUrl: String?) {
+//    Log.d("PictureOfDay", imgUrl?.url ?: "no picture of the day")
     imgUrl?.let {
-        val imgUri = it.url //imgUrl.toUri().buildUpon().scheme("https").build()
-        Picasso.with(imageView.context)
-            .load(imgUri)
-            .placeholder(R.drawable.loading_animation)
-            .error(R.drawable.ic_broken_image)
-            .into(imageView);
+        if (it.isNotBlank()) {
+            val imgUri = it //imgUrl.toUri().buildUpon().scheme("https").build()
+            Picasso.with(imageView.context)
+                .load(imgUri)
 
+                .placeholder(R.drawable.loading_animation)
+                .error(R.drawable.ic_broken_image)
+                .into(imageView)
+        }
     }
 
 }

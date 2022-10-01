@@ -2,7 +2,7 @@ package udacity.fwd.project2solution.ui.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import udacity.fwd.project2solution.model.Asteroid
+import udacity.fwd.project2solution.domain.model.Asteroid
 
 
 class DetailViewModelFactory(private val asteroid: Asteroid) : ViewModelProvider.Factory {

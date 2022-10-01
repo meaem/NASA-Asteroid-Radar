@@ -32,7 +32,7 @@
                 android:contentDescription="@string/image_of_the_day"
                 android:scaleType="centerCrop"
                 app:imageOfDayStatus="@{viewModel.imgOfTheDayStatus}"
-                app:imageUrl="@{viewModel.imageOfDay}" />
+                app:imageUrl="@{viewModel.imageOfDay.url}" />
 
             <TextView
                 android:id="@+id/textView"
@@ -111,8 +111,8 @@
                 android:layout_height="48dp"
                 android:layout_marginEnd="16dp"
                 android:contentDescription="@string/loadind_data_from_remote_site"
-                android:tint="#000000"
-                app:asteroidApiStatus="@{viewModel.apiStatus}" />
+                app:asteroidApiStatus="@{viewModel.apiStatus}"
+                app:tint="#000000" />
 
             <TextView
 
