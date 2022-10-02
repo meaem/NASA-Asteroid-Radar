@@ -68,15 +68,16 @@ class AsteroidRepository(db: AsteroidDatabase) {
                 parseAsteroidsJsonResult(JSONObject(resultObject)).asDatabaseModel()
 
             asteroidSource.addAllAsteroids(_remoteAsteroids)
-//                _apiStatus.value = AsteroidApiStatus.DONE
 
-//            } catch (e: Exception) {
-
-//                _apiStatus.value = AsteroidApiStatus.ERROR
-//                _remoteAsteroids.value = listOf()
-//                Log.d("MainViewModel", e.stackTraceToString())
-//            }
         }
+    }
+
+    suspend fun removePreviousAsteroids() {
+        asteroidSource.deleteAllBefore(today)
+    }
+
+    suspend fun removePreviousPics() {
+        picOfDaySource.deleteAllBefore(today)
     }
 
 

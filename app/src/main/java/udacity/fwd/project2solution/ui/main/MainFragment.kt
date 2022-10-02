@@ -6,16 +6,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import udacity.fwd.project2solution.R
-import udacity.fwd.project2solution.database.AsteroidDatabase
 import udacity.fwd.project2solution.databinding.FragmentMainBinding
 
 
 class MainFragment : Fragment() {
     val viewModel by viewModels<MainViewModel> {
         MainViewModelFactory(
-            AsteroidDatabase.getInstance(
-                requireNotNull(this.activity).application
-            ).asteroidDao, requireNotNull(this.activity).application
+             requireNotNull(this.activity).application
         )
     }
 

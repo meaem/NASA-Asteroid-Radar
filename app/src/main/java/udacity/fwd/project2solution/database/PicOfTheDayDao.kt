@@ -15,4 +15,7 @@ interface PicOfTheDayDao {
 
     @Query("SELECT * from pic_of_day_table pic where pic.date=:startDate")
     fun getPicOfTheDay(startDate: String): LiveData<PictureOfDayEntity>
+
+    @Query("DELETE from pic_of_day_table where date < :date")
+    suspend fun deleteAllBefore(date: String)
 }

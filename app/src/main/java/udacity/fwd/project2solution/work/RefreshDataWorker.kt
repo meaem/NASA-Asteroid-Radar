@@ -16,6 +16,9 @@ class RefreshDataWorker(appContext: Context, params: WorkerParameters) :
     override suspend fun doWork(): Result {
         val database = AsteroidDatabase.getInstance(applicationContext)
         val repository = AsteroidRepository(database)
+
+        repository.removePreviousAsteroids()
+        repository.removePreviousPics()
         return try {
             repository.refreshImageOfTheDay()
             repository.refreshAsteroids()
