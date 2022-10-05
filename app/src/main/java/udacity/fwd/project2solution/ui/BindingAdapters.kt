@@ -9,7 +9,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import udacity.fwd.project2solution.domain.model.Asteroid
-import udacity.fwd.project2solution.ui.main.AsteroidApiStatus
+import udacity.fwd.project2solution.repository.AsteroidApiStatus
 import udacity.fwd.project2solution.ui.main.AsteroidListAdapter
 
 @BindingAdapter("statusIcon")
@@ -18,6 +18,15 @@ fun bindAsteroidStatusImage(imageView: ImageView, isHazardous: Boolean) {
         imageView.setImageResource(R.drawable.ic_status_potentially_hazardous)
     } else {
         imageView.setImageResource(R.drawable.ic_status_normal)
+    }
+}
+
+@BindingAdapter("statusColor")
+fun bindAsteroidStatusFontColor(tv: TextView, isHazardous: Boolean) {
+    if (isHazardous) {
+        tv.setTextColor(tv.context.getColor(R.color.potentially_hazardous))//.setImageResource(R.drawable.ic_status_potentially_hazardous)
+    } else {
+        tv.setTextColor(tv.context.getColor(R.color.default_text_color))
     }
 }
 
@@ -59,7 +68,7 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<Asteroid>?) {
 @BindingAdapter("asteroidApiStatus")
 fun bindAsteroidStatus(imageView: ImageView, status: AsteroidApiStatus?) {
     when (status) {
-        AsteroidApiStatus.LOADING -> {
+        AsteroidApiStatus.FETCHING -> {
             imageView.visibility = View.VISIBLE
             imageView.setImageResource(R.drawable.downloading_animation)
             imageView.contentDescription = imageView.context.getString(R.string.loading_asteroids)
@@ -85,7 +94,7 @@ fun bindAsteroidStatus(imageView: ImageView, status: AsteroidApiStatus?) {
 @BindingAdapter("asteroidApiStatus")
 fun bindAsteroidStatusTextView(imageView: TextView, status: AsteroidApiStatus?) {
     when (status) {
-        AsteroidApiStatus.LOADING -> {
+        AsteroidApiStatus.FETCHING -> {
             imageView.visibility = View.VISIBLE
             imageView.setText(R.string.fetching_data)
 
@@ -111,7 +120,7 @@ fun bindAsteroidStatusTextView(imageView: TextView, status: AsteroidApiStatus?) 
 @BindingAdapter("imageOfDayStatus")
 fun bindimageOfDayStatus(imageView: ImageView, status: AsteroidApiStatus) {
     when (status) {
-        AsteroidApiStatus.LOADING -> {
+        AsteroidApiStatus.FETCHING -> {
             imageView.visibility = View.VISIBLE
             imageView.setImageResource(R.drawable.loading_animation)
             imageView.contentDescription =

@@ -10,10 +10,7 @@ data class PictureOfDayEntity(
     val date: String = "",
     val mediaType: String,
     val title: String,
-    val url: String,
-    val localURI: String = ""
-
-
+    val url: String
 )
 
 fun PictureOfDayEntity.asDomainModel(): PictureOfDay {

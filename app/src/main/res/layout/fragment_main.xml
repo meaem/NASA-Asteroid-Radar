@@ -69,21 +69,22 @@
             android:layout_height="0dp"
             android:clipToPadding="false"
             app:layoutManager="LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@id/loading_remotely_frame"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title"
             app:layout_constraintVertical_bias="0.0"
             app:listData="@{viewModel.asteroids}"
             tools:listitem="@layout/asteroid_recycler_view_item" />
 
+        <!--        app:asteroidApiStatus="@{viewModel.dbStatus}"-->
         <ImageView
             android:id="@+id/status_loading_wheel"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:contentDescription="@string/loading_asteroids"
-            app:asteroidApiStatus="@{viewModel.dbStatus}"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -101,7 +102,7 @@
             android:background="@color/text_grey"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/asteroid_recycler"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 

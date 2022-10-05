@@ -17,11 +17,7 @@ data class AsteroidEntity(
     val relativeVelocity: Double,
     val distanceFromEarth: Double,
     val isPotentiallyHazardous: Boolean
-) {
-    override fun toString(): String {
-        return codename
-    }
-}
+)
 
 fun List<AsteroidEntity>.asDomainModel(): List<Asteroid> {
     return map {

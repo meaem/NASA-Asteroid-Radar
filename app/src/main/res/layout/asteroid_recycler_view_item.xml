@@ -26,6 +26,7 @@
             app:layout_constraintEnd_toStartOf="@+id/isPotentiallyHazardousImgV"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:statusColor="@{asteroid.isPotentiallyHazardous}"
             tools:text="68347 (2001 KB76)" />
 
         <TextView
@@ -38,6 +39,8 @@
             android:textColor="@color/text_grey"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/asteroidNameTv"
+            app:statusColor="@{asteroid.isPotentiallyHazardous}"
+
             tools:text="2020-08-11" />
 
         <ImageView

@@ -14,4 +14,8 @@ data class Asteroid(
     val relativeVelocity: Double,
     val distanceFromEarth: Double,
     val isPotentiallyHazardous: Boolean
-) : Parcelable
+) : Parcelable {
+    override fun toString(): String {
+        return codename
+    }
+}

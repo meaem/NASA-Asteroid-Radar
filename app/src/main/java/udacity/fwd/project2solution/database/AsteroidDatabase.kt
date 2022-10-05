@@ -9,7 +9,7 @@ import udacity.fwd.project2solution.database.entities.PictureOfDayEntity
 
 @Database(
     entities = [AsteroidEntity::class, PictureOfDayEntity::class],
-    version = 2,
+    version = 3,
     exportSchema = false
 )
 abstract class AsteroidDatabase : RoomDatabase() {

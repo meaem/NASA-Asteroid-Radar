@@ -7,6 +7,9 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import udacity.fwd.project2solution.R
 import udacity.fwd.project2solution.database.AsteroidDatabase
+import udacity.fwd.project2solution.domain.model.Asteroid
+import udacity.fwd.project2solution.domain.model.PictureOfDay
+import udacity.fwd.project2solution.repository.AsteroidApiStatus
 import udacity.fwd.project2solution.repository.AsteroidRepository
 
 enum class DataChoices {
@@ -17,37 +20,31 @@ class MainViewModel(application: Application) :
     AndroidViewModel(application) {
 
 
-    private val repo = AsteroidRepository(AsteroidDatabase.getInstance(application))
+    private val repo = AsteroidRepository.getInstance(AsteroidDatabase.getInstance(application))
 
-    val asteroids = repo.asteroids
-    val imageOfDay = repo.imageOfDay
+    private var _asteroids = MutableLiveData<LiveData<List<Asteroid>>>(MutableLiveData(listOf()))
 
+    val asteroids = Transformations.map(_asteroids) {
+        it
+    }
 
-    private val _apiStatus = MutableLiveData<AsteroidApiStatus>()
-    val apiStatus: LiveData<AsteroidApiStatus>
-        get() = _apiStatus
-
-
-    private val _imgOfTheDayStatus = MutableLiveData<AsteroidApiStatus>()
-    val imgOfTheDayStatus: LiveData<AsteroidApiStatus>
-        get() = _imgOfTheDayStatus
+    val imageOfDay: LiveData<PictureOfDay?>
+        get() = repo.imageOfDay
 
     private val _title = MutableLiveData<String>()
     val title: LiveData<String>
         get() = _title
 
 
-    val dbStatus = Transformations.map(asteroids) {
-        when (it?.isEmpty()) {
-            true -> AsteroidApiStatus.LOADING
-            else -> AsteroidApiStatus.DONE
-        }
-    }
+    val imgOfTheDayStatus: LiveData<AsteroidApiStatus>
+        get() = repo.imgOfTheDayStatus
+
+    val apiStatus = repo.apiStatus
 
 
     init {
-        _imgOfTheDayStatus.value = AsteroidApiStatus.LOADING
-        _apiStatus.value = AsteroidApiStatus.LOADING
+//        _imgOfTheDayStatus.value = AsteroidApiStatus.LOADING
+//        _apiStatus.value = AsteroidApiStatus.LOADING
 
         updateData(DataChoices.CURRENT_WEEK)
         viewModelScope.launch {
@@ -59,16 +56,16 @@ class MainViewModel(application: Application) :
                 }
             }
 
-            async {
-                try {
-                    repo.refreshAsteroids()
-                    _apiStatus.value = AsteroidApiStatus.DONE
-                } catch (ex: Exception) {
-                    _apiStatus.value = AsteroidApiStatus.ERROR
-                    Log.d("MainViewModel", "Failed to refresh asteroids from network")
-
-                }
-            }
+//            async {
+//                try {
+            _asteroids.value = repo.loadWeekAsteroids()
+//                    _apiStatus.value = AsteroidApiStatus.DONE
+//                } catch (ex: Exception) {
+//                    _apiStatus.value = AsteroidApiStatus.ERROR
+//                    Log.d("MainViewModel", "Failed to refresh asteroids from network")
+//
+//                }
+//            }
 
 
         }
@@ -78,9 +75,18 @@ class MainViewModel(application: Application) :
     fun updateData(choices: DataChoices) {
         val app = getApplication<Application>()
         when (choices) {
-            DataChoices.CURRENT_WEEK -> _title.value = app.getString(R.string.title_weekly)
-            DataChoices.TODAY -> _title.value = app.getString(R.string.today)
-            DataChoices.LOCALLY -> _title.value = app.getString(R.string.locally)
+            DataChoices.CURRENT_WEEK -> {
+                _title.value = app.getString(R.string.title_weekly)
+                _asteroids.value = repo.loadWeekAsteroids()
+            }
+            DataChoices.TODAY -> {
+                _title.value = app.getString(R.string.today)
+                _asteroids.value = repo.loadTodaysAsteroids()
+            }
+            DataChoices.LOCALLY -> {
+                _title.value = app.getString(R.string.locally)
+                _asteroids.value = repo.loadAllAsteroids()
+            }
         }
     }
 
