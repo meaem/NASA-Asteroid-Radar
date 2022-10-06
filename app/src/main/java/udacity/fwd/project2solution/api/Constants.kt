@@ -1,6 +1,7 @@
 package udacity.fwd.project2solution.api
 
 import okhttp3.HttpUrl
+import udacity.fwd.project2solution.BuildConfig
 
 object Constants {
     const val SCHEME = "https"
@@ -11,7 +12,7 @@ object Constants {
     const val API_QUERY_DATE_FORMAT = "yyyy-MM-dd"
     const val DEFAULT_END_DATE_DAYS = 7
 
-    const val API_KEY_VALUE = "3bf4p7AOVBACbLJfQdipfVDgtbCFsgdN8vbiDAWy"
+    const val API_KEY_VALUE = BuildConfig.API_KEY_VALUE
 
 
     val url = HttpUrl.Builder()
