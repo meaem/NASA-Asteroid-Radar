@@ -65,8 +65,11 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
     implementation 'androidx.fragment:fragment-ktx:1.5.2'
 
-    implementation "android.arch.navigation:navigation-fragment-ktx:1.0.0"
-    implementation "android.arch.navigation:navigation-ui-ktx:1.0.0"
+//    implementation "android.arch.navigation:navigation-fragment-ktx:1.0.0"
+//    implementation "android.arch.navigation:navigation-ui-ktx:1.0.0"
+    implementation("androidx.navigation:navigation-runtime-ktx:2.5.2")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.5.2")
+    implementation("androidx.navigation:navigation-ui-ktx:2.5.2")
 
     implementation "com.squareup.moshi:moshi:1.13.0"
     implementation "com.squareup.moshi:moshi-kotlin:1.13.0"
