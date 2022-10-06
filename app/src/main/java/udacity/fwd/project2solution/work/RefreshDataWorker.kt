@@ -15,7 +15,7 @@ class RefreshDataWorker(appContext: Context, params: WorkerParameters) :
     }
 
     override suspend fun doWork(): Result {
-        Log.d("RefreshDataWorker", "Worker done")
+        Log.d(WORK_NAME, "Worker started work")
         val database = AsteroidDatabase.getInstance(applicationContext)
         val repository = AsteroidRepository.getInstance(database)
 
@@ -24,12 +24,12 @@ class RefreshDataWorker(appContext: Context, params: WorkerParameters) :
         return try {
             repository.refreshImageOfTheDay()
             repository.refreshAsteroids()
-            Log.d("RefreshDataWorker", "Worker Finish")
+            Log.d(WORK_NAME, "Worker Finish successfully")
 
 
             Result.success()
         } catch (e: HttpException) {
-            Log.d("RefreshDataWorker", "Worker ERROR")
+            Log.d(WORK_NAME, "Worker ERROR")
 
             Result.retry()
         }

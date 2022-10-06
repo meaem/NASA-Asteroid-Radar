@@ -92,6 +92,7 @@
                         android:layout_height="wrap_content"
                         android:padding="16dp"
                         android:onClick="@{()-> viewModel.displayAlert()}"
+                        android:contentDescription="@string/click_this_button_to_know_more_about_astronomical_units"
                         app:srcCompat="@drawable/ic_help_circle" />
 
                 </LinearLayout>

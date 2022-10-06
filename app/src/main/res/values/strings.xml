@@ -14,20 +14,27 @@
     <string name="km_unit_format">%f km</string>
     <string name="km_s_unit_format">%f km/s</string>
     <string name="image_of_the_day">Image of the Day</string>
-    <string name="astronomica_unit_explanation">The astronomical unit (au) is a unit of length, roughly the distance from Earth to the Sun and equal to about 150 million kilometres (93 million miles)</string>
+    <string name="astronomical_unit_explanation">The astronomical unit (au) is a unit of length, roughly the distance from Earth to the Sun and equal to about 150 million kilometres (93 million miles)</string>
     <string name="astronomical_unit_explanation_button">Astronomical unit definition</string>
     <string name="potentially_hazardous_asteroid_image">Potentially hazardous asteroid image</string>
     <string name="not_hazardous_asteroid_image">Not hazardous asteroid image</string>
     <string name="this_is_nasa_s_picture_of_day_showing_nothing_yet">This is NASA\'s picture of day, showing nothing yet</string>
-    <string name="nasa_picture_of_day_content_description_format">NASA\'s picture of day: %s</string>
     <string name="loading_asteroids">Loading Asteroids</string>
     <string name="failed_loading_asteroids">Loading asteroids failure due to internet connection error</string>
     <string name="failed_fetch_data">Remote Fetch failure …</string>
     <string name="loading_image_of_the_day">Loading Image of the day</string>
     <string name="failed_loading_image_of_the_day">Loading Image of the day failure due to internet connection error</string>
-    <string name="loadind_data_from_remote_site">Loadind data from remote site</string>
+    <string name="loading_data_from_remote_site">Loading data from remote site</string>
     <string name="fetching_data">Fetching data remotely …</string>
-    <string name="title_weekly">Weekly</string>
-    <string name="today">today</string>
-    <string name="locally">locally</string>
+    <string name="title_week_list">Week List</string>
+    <string name="title_today_list">Today List</string>
+    <string name="title_all_list">All List</string>
+    <!--    content descriptions-->
+    <string name="click_this_button_to_know_more_about_astronomical_units">click this button to know more about astronomical units</string>
+    <string name="asteroid_codename_description">Asteroid codename: %s\n</string>
+    <string name="asteroid_closeApproachDate_description">Asteroid close approach date: %s\n</string>
+    <string name="potentially_hazardous_asteroid_description">Potentially hazardous asteroid</string>
+    <string name="not_hazardous_asteroid_description">Not hazardous asteroid\n</string>
+    <string name="nasa_picture_of_day_content_description_format">NASA\'s picture of day: %s</string>
+
 </resources>

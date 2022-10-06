@@ -1,14 +1,13 @@
 package udacity.fwd.project2solution
 
-import android.os.Build
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import udacity.fwd.project2solution.domain.model.Asteroid
+import udacity.fwd.project2solution.domain.model.PictureOfDay
 import udacity.fwd.project2solution.repository.AsteroidApiStatus
 import udacity.fwd.project2solution.ui.main.AsteroidListAdapter
 
@@ -16,8 +15,13 @@ import udacity.fwd.project2solution.ui.main.AsteroidListAdapter
 fun bindAsteroidStatusImage(imageView: ImageView, isHazardous: Boolean) {
     if (isHazardous) {
         imageView.setImageResource(R.drawable.ic_status_potentially_hazardous)
+        imageView.contentDescription =
+            imageView.context.getString(R.string.potentially_hazardous_asteroid_description)
     } else {
         imageView.setImageResource(R.drawable.ic_status_normal)
+        imageView.contentDescription =
+            imageView.context.getString(R.string.not_hazardous_asteroid_description)
+
     }
 }
 
@@ -34,8 +38,14 @@ fun bindAsteroidStatusFontColor(tv: TextView, isHazardous: Boolean) {
 fun bindDetailsStatusImage(imageView: ImageView, isHazardous: Boolean) {
     if (isHazardous) {
         imageView.setImageResource(R.drawable.asteroid_hazardous)
+        imageView.contentDescription =
+            imageView.context.getString(R.string.potentially_hazardous_asteroid_image)
+
     } else {
         imageView.setImageResource(R.drawable.asteroid_safe)
+        imageView.contentDescription =
+            imageView.context.getString(R.string.not_hazardous_asteroid_image)
+
     }
 }
 
@@ -84,34 +94,34 @@ fun bindAsteroidStatus(imageView: ImageView, status: AsteroidApiStatus?) {
             imageView.visibility = View.GONE
         }
         else -> { // if status is null
-            imageView.visibility = View.VISIBLE
-            imageView.setImageResource(R.drawable.downloading_animation)
-            imageView.contentDescription = imageView.context.getString(R.string.loading_asteroids)
+            imageView.visibility = View.GONE
+//            imageView.setImageResource(R.drawable.downloading_animation)
+//            imageView.contentDescription = imageView.context.getString(R.string.loading_asteroids)
         }
     }
 }
 
 @BindingAdapter("asteroidApiStatus")
-fun bindAsteroidStatusTextView(imageView: TextView, status: AsteroidApiStatus?) {
+fun bindAsteroidStatusTextView(tv: TextView, status: AsteroidApiStatus?) {
     when (status) {
         AsteroidApiStatus.FETCHING -> {
-            imageView.visibility = View.VISIBLE
-            imageView.setText(R.string.fetching_data)
+            tv.visibility = View.VISIBLE
+            tv.setText(R.string.fetching_data)
 
         }
         AsteroidApiStatus.ERROR -> {
-            imageView.visibility = View.VISIBLE
-            imageView.setText(R.string.failed_fetch_data)
-            imageView.contentDescription =
-                imageView.context.getString(R.string.failed_loading_asteroids)
+            tv.visibility = View.VISIBLE
+            tv.setText(R.string.failed_fetch_data)
+            tv.contentDescription =
+                tv.context.getString(R.string.failed_loading_asteroids)
 
         }
         AsteroidApiStatus.DONE -> {
-            imageView.visibility = View.GONE
+            tv.visibility = View.GONE
         }
         else -> { // if status is null
-            imageView.visibility = View.VISIBLE
-            imageView.setText(R.string.fetching_data)
+            tv.visibility = View.GONE
+//            tv.setText(R.string.fetching_data)
         }
     }
 }
@@ -139,16 +149,19 @@ fun bindimageOfDayStatus(imageView: ImageView, status: AsteroidApiStatus) {
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.M)
-@BindingAdapter("imageUrl")
-fun bindImageOfDayStatus(imageView: ImageView, imgUrl: String?) {
-//    Log.d("PictureOfDay", imgUrl?.url ?: "no picture of the day")
-    imgUrl?.let {
-        if (it.isNotBlank()) {
+//@RequiresApi(Build.VERSION_CODES.M)
+@BindingAdapter("imageOfDay")
+fun bindImageOfDayStatus(imageView: ImageView, img: PictureOfDay?) {
+//    Log.d("PictureOfDay", imgUrl?: "no picture of the day")
+    img?.let {
+        imageView.contentDescription = imageView.context.getString(
+            R.string.nasa_picture_of_day_content_description_format,
+            img.title
+        )
+        if (it.url.isNotBlank()) {
             val imgUri = it //imgUrl.toUri().buildUpon().scheme("https").build()
             Picasso.with(imageView.context)
-                .load(imgUri)
-
+                .load(img.url)
                 .placeholder(R.drawable.loading_animation)
                 .error(R.drawable.ic_broken_image)
                 .into(imageView)

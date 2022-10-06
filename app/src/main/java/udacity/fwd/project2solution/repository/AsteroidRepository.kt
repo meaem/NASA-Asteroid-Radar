@@ -1,5 +1,6 @@
 package udacity.fwd.project2solution.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
@@ -10,6 +11,7 @@ import udacity.fwd.project2solution.api.*
 import udacity.fwd.project2solution.database.AsteroidDatabase
 import udacity.fwd.project2solution.database.entities.asDomainModel
 import udacity.fwd.project2solution.domain.model.Asteroid
+import udacity.fwd.project2solution.domain.model.PictureOfDay
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -81,6 +83,14 @@ class AsteroidRepository private constructor(private val db: AsteroidDatabase) {
     }
 
 
+    fun loadPicOfTheDay(): LiveData<PictureOfDay> {
+        Log.d("AsteroidRepository", today)
+        return Transformations.map(db.picOdDayDao.getPicOfTheDay(today)) {
+            it.asDomainModel()
+        }
+    }
+
+
     suspend fun refreshImageOfTheDay() {
         withContext(Dispatchers.Main) {
             _imgOfTheDayStatus.value = AsteroidApiStatus.FETCHING
@@ -122,6 +132,7 @@ class AsteroidRepository private constructor(private val db: AsteroidDatabase) {
             _apiStatus.value = AsteroidApiStatus.DONE
         }
     }
+
     suspend fun removePreviousAsteroids() {
         db.asteroidDao.deleteAllBefore(today)
     }

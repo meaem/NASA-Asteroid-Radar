@@ -2,9 +2,10 @@ package udacity.fwd.project2solution.ui.main
 
 import android.app.Application
 import android.util.Log
-import androidx.lifecycle.*
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import udacity.fwd.project2solution.R
 import udacity.fwd.project2solution.database.AsteroidDatabase
 import udacity.fwd.project2solution.domain.model.Asteroid
@@ -28,8 +29,10 @@ class MainViewModel(application: Application) :
         it
     }
 
-    val imageOfDay: LiveData<PictureOfDay?>
-        get() = repo.imageOfDay
+    private var _picOfDay = repo.loadPicOfTheDay()
+
+    val imageOfDay: LiveData<PictureOfDay>
+        get() = _picOfDay
 
     private val _title = MutableLiveData<String>()
     val title: LiveData<String>
@@ -39,7 +42,10 @@ class MainViewModel(application: Application) :
     val imgOfTheDayStatus: LiveData<AsteroidApiStatus>
         get() = repo.imgOfTheDayStatus
 
-    val apiStatus = repo.apiStatus
+    private val _apiStatus = repo.apiStatus
+
+    val apiStatus: LiveData<AsteroidApiStatus>
+        get() = repo.apiStatus
 
 
     init {
@@ -47,18 +53,23 @@ class MainViewModel(application: Application) :
 //        _apiStatus.value = AsteroidApiStatus.LOADING
 
         updateData(DataChoices.CURRENT_WEEK)
-        viewModelScope.launch {
-            async {
-                try {
-                    repo.refreshImageOfTheDay()
-                } catch (ex: Exception) {
-                    Log.d("MainViewModel", "Failed to refresh pic of the day from network")
-                }
-            }
+//        viewModelScope.launch {
+//            async {
+//                try {
+//                    repo.refreshImageOfTheDay()
+//                } catch (ex: Exception) {
+//                    Log.d("MainViewModel", "Failed to refresh pic of the day from network")
+//                }
+//            }
 
 //            async {
 //                try {
-            _asteroids.value = repo.loadWeekAsteroids()
+        Log.d("MainViewModel", "loading pic of the day")
+
+        //_picOfDay.value =
+        Log.d("MainViewModel", repo.loadPicOfTheDay().toString())
+
+        _asteroids.value = repo.loadWeekAsteroids()
 //                    _apiStatus.value = AsteroidApiStatus.DONE
 //                } catch (ex: Exception) {
 //                    _apiStatus.value = AsteroidApiStatus.ERROR
@@ -68,7 +79,7 @@ class MainViewModel(application: Application) :
 //            }
 
 
-        }
+//        }
 
     }
 
@@ -76,15 +87,15 @@ class MainViewModel(application: Application) :
         val app = getApplication<Application>()
         when (choices) {
             DataChoices.CURRENT_WEEK -> {
-                _title.value = app.getString(R.string.title_weekly)
+                _title.value = app.getString(R.string.title_week_list)
                 _asteroids.value = repo.loadWeekAsteroids()
             }
             DataChoices.TODAY -> {
-                _title.value = app.getString(R.string.today)
+                _title.value = app.getString(R.string.title_today_list)
                 _asteroids.value = repo.loadTodaysAsteroids()
             }
             DataChoices.LOCALLY -> {
-                _title.value = app.getString(R.string.locally)
+                _title.value = app.getString(R.string.title_all_list)
                 _asteroids.value = repo.loadAllAsteroids()
             }
         }
