@@ -38,7 +38,7 @@ class AsteroidRepository private constructor(private val db: AsteroidDatabase) {
 
     private val today = SimpleDateFormat(
         Constants.API_QUERY_DATE_FORMAT,
-        Locale.getDefault()
+        Locale.ENGLISH
     ).format(cal.time)
 
 
@@ -74,7 +74,7 @@ class AsteroidRepository private constructor(private val db: AsteroidDatabase) {
         cal.add(Calendar.DAY_OF_MONTH, 7)
         val todayPlus7 = SimpleDateFormat(
             Constants.API_QUERY_DATE_FORMAT,
-            Locale.getDefault()
+            Locale.ENGLISH
         ).format(cal.time)
 
         return Transformations.map(db.asteroidDao.getAsteroidsInPeriod(today, todayPlus7)) { ast ->
@@ -86,7 +86,7 @@ class AsteroidRepository private constructor(private val db: AsteroidDatabase) {
     fun loadPicOfTheDay(): LiveData<PictureOfDay> {
         Log.d("AsteroidRepository", today)
         return Transformations.map(db.picOdDayDao.getPicOfTheDay(today)) {
-            it.asDomainModel()
+            it?.asDomainModel()
         }
     }
 

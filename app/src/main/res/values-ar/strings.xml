@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">رادار الكويكبات </string>
+
+    <string name="next_week_asteroids">عرض الكويكبات خلال اسبوع</string>
+    <string name="today_asteroids">عرض كويكبات اليوم</string>
+    <string name="saved_asteroids">عرض جميع الكويكبات المسجلة</string>
+    <string name="code_name_title">الرمز الكودي</string>
+    <string name="close_approach_data_title">تاريخ اقرب نقطة</string>
+    <string name="absolute_magnitude_title">الحجم المطلق</string>
+    <string name="estimated_diameter_title">العرض المقدر</string>
+    <string name="relative_velocity_title">السرعة النسبية</string>
+    <string name="distance_from_earth_title">المسافة من الارض</string>
+    <string name="astronomical_unit_format">%f وحدة فلكية</string>
+    <string name="km_unit_format">%f كيلومتر</string>
+    <string name="km_s_unit_format">%f كيلومتر/ثانية</string>
+    <string name="image_of_the_day">صورة اليوم</string>
+    <string name="astronomical_unit_explanation">الوحدة الفلكية (وف) هي وحدة طول ، تقريبًا المسافة من الأرض إلى الشمس وتساوي حوالي 150 مليون كيلومتر (93 مليون ميل)</string>
+    <string name="astronomical_unit_explanation_button">تعريف الوحدة الفلكية</string>
+    <string name="potentially_hazardous_asteroid_image">صورة كويكب محتمل ان يكون خطير</string>
+    <string name="not_hazardous_asteroid_image">صورة كويكب غير خطير</string>
+    <string name="this_is_nasa_s_picture_of_day_showing_nothing_yet">هذه صورة ناسا لليوم ، ولا تظهر شيئًا بعد</string>
+    <string name="loading_asteroids">تحميل الكويكبات</string>
+    <string name="failed_loading_asteroids">فشل تحميل الكويكبات نتيجة مشكلة في الاتصال بالانترنت</string>
+    <string name="failed_fetch_data">فشل التحميل عن بعد …</string>
+    <string name="loading_image_of_the_day">تحميل صورة اليوم</string>
+    <string name="failed_loading_image_of_the_day">فشل تحميل صورة اليوم نتيجة مشكلة في الاتصال بالانترنت</string>
+    <string name="loading_data_from_remote_site">تحميل البيانات من الموقع</string>
+    <string name="fetching_data">تحميل البيانات عن بعد …</string>
+    <string name="title_week_list">قائمة الاسبوع</string>
+    <string name="title_today_list">قائمة اليوم</string>
+    <string name="title_all_list">قائمة الكل</string>
+    <!--    content descriptions-->
+    <string name="click_this_button_to_know_more_about_astronomical_units">انقر فوق هذا الزر لمعرفة المزيد عن الوحدات الفلكية</string>
+    <string name="asteroid_codename_description"> الاسم الكودي للكويكب: %s\n</string>
+    <string name="asteroid_closeApproachDate_description">الكويكب تاريخ اقرب اقتراب: %s\n</string>
+    <string name="potentially_hazardous_asteroid_description">كويكب محتمل ان يكون خطير</string>
+    <string name="not_hazardous_asteroid_description">كويكب غير خطير\n</string>
+    <string name="nasa_picture_of_day_content_description_format">صورة ناسا لليوم: %s</string>
+
+</resources>

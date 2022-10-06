@@ -21,9 +21,10 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:text="@{asteroid.codename}"
             android:contentDescription="@{@string/asteroid_codename_description(asteroid.codename)}"
+            android:text="@{asteroid.codename}"
             android:textColor="@color/default_text_color"
+            android:textDirection="locale"
             app:layout_constraintEnd_toStartOf="@+id/isPotentiallyHazardousImgV"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -36,13 +37,15 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="@{asteroid.closeApproachDate}"
             android:contentDescription="@{@string/asteroid_closeApproachDate_description(asteroid.closeApproachDate)}"
+            android:text="@{asteroid.closeApproachDate}"
             android:textColor="@color/text_grey"
+            android:textDirection="locale"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/asteroidNameTv"
-            app:statusColor="@{asteroid.isPotentiallyHazardous}"
 
+            app:statusColor="@{asteroid.isPotentiallyHazardous}"
+            tools:ignore="TextContrastCheck"
             tools:text="2020-08-11" />
 
         <ImageView
