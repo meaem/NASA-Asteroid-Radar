@@ -12,7 +12,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp">
 
         <TextView
             android:id="@+id/asteroidNameTv"
@@ -23,6 +24,7 @@
             android:layout_marginEnd="16dp"
             android:contentDescription="@{@string/asteroid_codename_description(asteroid.codename)}"
             android:text="@{asteroid.codename}"
+            android:textAppearance="@style/labelStyle"
             android:textColor="@color/default_text_color"
             android:textDirection="locale"
             app:layout_constraintEnd_toStartOf="@+id/isPotentiallyHazardousImgV"
@@ -36,9 +38,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:contentDescription="@{@string/asteroid_closeApproachDate_description(asteroid.closeApproachDate)}"
             android:text="@{asteroid.closeApproachDate}"
+            android:textAppearance="@style/valueStyle"
             android:textColor="@color/text_grey"
             android:textDirection="locale"
             app:layout_constraintStart_toStartOf="parent"
