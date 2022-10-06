@@ -1,4 +1,4 @@
-package udacity.fwd.project2solution.api
+package udacity.fwd.project2solution.network
 
 
 import com.squareup.moshi.Moshi
@@ -10,10 +10,10 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
-import udacity.fwd.project2solution.api.Constants.API_KEY_STRING
-import udacity.fwd.project2solution.api.Constants.END_DATE_STRING
-import udacity.fwd.project2solution.api.Constants.START_DATE_STRING
-import udacity.fwd.project2solution.api.Constants.url
+import udacity.fwd.project2solution.network.Constants.API_KEY_STRING
+import udacity.fwd.project2solution.network.Constants.END_DATE_STRING
+import udacity.fwd.project2solution.network.Constants.START_DATE_STRING
+import udacity.fwd.project2solution.network.Constants.url
 
 /**
  * Build the Moshi object that Retrofit will be using, making sure to add the Kotlin adapter for

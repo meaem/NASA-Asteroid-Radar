@@ -1,4 +1,4 @@
-package udacity.fwd.project2solution.api
+package udacity.fwd.project2solution.network
 
 import okhttp3.HttpUrl
 import udacity.fwd.project2solution.BuildConfig
@@ -18,6 +18,6 @@ object Constants {
     val url = HttpUrl.Builder()
         .scheme(SCHEME)
         .host(HOST)
-        .build();
+        .build()
 }
 

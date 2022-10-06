@@ -7,11 +7,11 @@ import androidx.lifecycle.Transformations
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
-import udacity.fwd.project2solution.api.*
 import udacity.fwd.project2solution.database.AsteroidDatabase
 import udacity.fwd.project2solution.database.entities.asDomainModel
 import udacity.fwd.project2solution.domain.model.Asteroid
 import udacity.fwd.project2solution.domain.model.PictureOfDay
+import udacity.fwd.project2solution.network.*
 import java.text.SimpleDateFormat
 import java.util.*
 

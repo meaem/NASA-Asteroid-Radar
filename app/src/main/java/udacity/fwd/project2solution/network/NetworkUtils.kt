@@ -1,9 +1,9 @@
-package udacity.fwd.project2solution.api
+package udacity.fwd.project2solution.network
 
 import android.util.Log
 import org.json.JSONObject
-import udacity.fwd.project2solution.api.Constants.API_QUERY_DATE_FORMAT
-import udacity.fwd.project2solution.api.Constants.DEFAULT_END_DATE_DAYS
+import udacity.fwd.project2solution.network.Constants.API_QUERY_DATE_FORMAT
+import udacity.fwd.project2solution.network.Constants.DEFAULT_END_DATE_DAYS
 import java.text.SimpleDateFormat
 import java.util.*
 

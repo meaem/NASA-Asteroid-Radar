@@ -1,4 +1,4 @@
-package udacity.fwd.project2solution.api
+package udacity.fwd.project2solution.network
 
 import com.squareup.moshi.Json
 import udacity.fwd.project2solution.database.entities.AsteroidEntity
